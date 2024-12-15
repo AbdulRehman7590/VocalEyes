@@ -1,6 +1,5 @@
 import { Stack } from "expo-router";
 import React from "react";
-import { useTheme } from "@/src/context/ThemeContext";
 import { LogBox } from "react-native";
 
 LogBox.ignoreAllLogs(true);

@@ -40,3 +40,4 @@ app-example
 __tests__/
 __pycache__/
 
+uploaded_images/

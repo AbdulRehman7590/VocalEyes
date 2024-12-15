@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { COLORS } from "@/src/constants/color";
@@ -20,8 +20,12 @@ export default function Welcome() {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => router.push("/(tabs)/home")}
+      onPress={() => router.push("/(tabs)/Home")}
     >
+      <Image
+        source={require("@/assets/images/welcome.png")} // Add a welcome image in the assets folder
+        style={styles.image}
+      />
       <Text style={styles.welcomeText}>Welcome, {username}!</Text>
       <Text style={styles.subtitle}>
         Tap anywhere to proceed to the Home page.
@@ -36,7 +40,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.background,
+    padding: 20,
   },
-  welcomeText: { fontSize: 32, fontWeight: "bold", color: COLORS.primary },
-  subtitle: { fontSize: 18, marginTop: 10, color: COLORS.secondary },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+    resizeMode: "contain",
+  },
+  welcomeText: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: COLORS.primary,
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: COLORS.secondary,
+    textAlign: "center",
+    marginTop: 10,
+  },
 });

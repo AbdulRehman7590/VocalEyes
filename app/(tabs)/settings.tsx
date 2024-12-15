@@ -4,20 +4,15 @@ import {
   Text,
   Switch,
   TextInput,
-  Button,
+  TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { COLORS } from "../../src/constants/color";
+import { COLORS } from "@/src/constants/color";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Settings() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [username, setUsername] = useState("");
-
-  const toggleTheme = async () => {
-    setIsDarkMode((prev) => !prev);
-    await AsyncStorage.setItem("theme", isDarkMode ? "light" : "dark");
-  };
 
   const saveUsername = async () => {
     await AsyncStorage.setItem("username", username);
@@ -29,40 +24,77 @@ export default function Settings() {
       <Text style={styles.heading}>Settings</Text>
 
       <View style={styles.settingRow}>
-        <Text style={styles.label}>Dark Mode:</Text>
-        <Switch value={isDarkMode} onValueChange={toggleTheme} />
-      </View>
-
-      <View style={styles.settingRow}>
-        <Text style={styles.label}>Set Username:</Text>
+        <Text style={styles.label}>Username</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter your name"
           value={username}
           onChangeText={setUsername}
+          placeholderTextColor="#888"
         />
       </View>
 
-      <Button title="Save Username" onPress={saveUsername} />
+      <TouchableOpacity style={styles.saveButton} onPress={saveUsername}>
+        <MaterialCommunityIcons name="content-save" size={20} color="#FFF" />
+        <Text style={styles.buttonText}>Save Username</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: COLORS.background },
-  heading: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: COLORS.background,
+    justifyContent: "center",
+  },
+  heading: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: COLORS.primary,
+    marginBottom: 30,
+    textAlign: "center",
+  },
   settingRow: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 15,
+    marginBottom: 20,
   },
-  label: { fontSize: 16 },
+  label: {
+    fontSize: 18,
+    color: COLORS.textPrimary,
+    fontWeight: "600",
+  },
   input: {
     borderWidth: 1,
     borderColor: COLORS.secondary,
     padding: 10,
     borderRadius: 8,
     flex: 1,
-    marginLeft: 10,
+    marginLeft: 15,
+    color: COLORS.textPrimary,
+    backgroundColor: "#fff",
+  },
+  saveButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.primary,
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#FFF",
+    marginLeft: 8,
   },
 });
