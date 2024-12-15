@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { uploadImageToOCR } from "@/src/services/api";
+import uploadImageToOCR from "@/src/services/api";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function ManualMode() {

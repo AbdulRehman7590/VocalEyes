@@ -1,11 +1,11 @@
-const BASE_URL = "https://5584-2a09-bac5-5042-254b-00-3b7-13.ngrok-free.app";
+const BASE_URL = "http://0.0.0.0:8000";
 
 /**
  * Upload an image to the OCR backend for text extraction.
  * @param {string} imageUri - The URI of the image to upload.
  * @returns {Promise<Object>} - The response from the server, including the extracted text.
  */
-export const uploadImageToOCR = async (imageUri) => {
+export default async function uploadImageToOCR(imageUri) {
   const formData = new FormData();
   formData.append("files", {
     uri: imageUri,
