@@ -1,11 +1,17 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import CustomTitle from "@/src/components/CustomTitle";
-import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { NavigationProp } from '@react-navigation/native';
 
-export default function Home() {
-  const router = useRouter();
+export default function HomeScreen({ navigation }: { navigation: NavigationProp<any> }) {
+  const handleCameraPress = () => {
+    navigation.navigate("Camera");
+  };
+
+  const handlePickerPress = () => {
+    navigation.navigate("Picker");
+  };
 
   return (
     <View style={styles.container}>
@@ -13,26 +19,18 @@ export default function Home() {
 
       <TouchableOpacity
         style={[styles.button, styles.manualButton]}
-        onPress={() => router.push("/(tabs)/ManualMode")}
+        onPress={handleCameraPress}
       >
         <MaterialCommunityIcons name="camera" size={24} color="#FFF" />
-        <Text style={styles.buttonText}>Manual Mode</Text>
+        <Text style={styles.buttonText}>Open Camera</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={[styles.button, styles.voiceButton]}
-        onPress={() => router.push("/(tabs)/VoiceMode")}
+        onPress={handlePickerPress}
       >
-        <MaterialCommunityIcons name="microphone" size={24} color="#FFF" />
-        <Text style={styles.buttonText}>Voice Mode</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={[styles.button, styles.settingsButton]}
-        onPress={() => router.push("/(tabs)/Settings")}
-      >
-        <MaterialCommunityIcons name="cog" size={24} color="#FFF" />
-        <Text style={styles.buttonText}>Settings</Text>
+        <MaterialCommunityIcons name="folder-open" size={24} color="#FFF" />
+        <Text style={styles.buttonText}>Open Picker</Text>
       </TouchableOpacity>
     </View>
   );
